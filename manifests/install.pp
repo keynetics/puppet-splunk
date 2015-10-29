@@ -60,12 +60,9 @@ class splunk::install (
     content => template('splunk/opt/splunk/etc/passwd.erb'),
   } ->
 
-  # recursively copy the contents of the auth dir
-  # This is causing a restart on the second run. - TODO
+  #setting the mode, owner and group here forces a restart if the splunk app
+  #makes any changes here.
   file { "${splunkhome}/etc/auth":
-      mode    => '0600',
-      owner   => 'splunk',
-      group   => 'splunk',
       recurse => true,
       purge   => false,
       source  => 'puppet:///modules/splunk/noarch/opt/splunk/etc/auth',
