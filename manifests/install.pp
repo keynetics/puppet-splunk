@@ -63,8 +63,9 @@ class splunk::install (
   #setting the mode, owner and group here forces a restart if the splunk app
   #makes any changes here.
   file { "${splunkhome}/etc/auth":
-      recurse => true,
-      purge   => false,
-      source  => 'puppet:///modules/splunk/noarch/opt/splunk/etc/auth',
+      recurse            => 'remote',
+      purge              => false,
+      source_permissions => 'ignore',
+      source             => 'puppet:///modules/splunk/noarch/opt/splunk/etc/auth',
   }
 }
