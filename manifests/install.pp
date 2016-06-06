@@ -58,14 +58,5 @@ class splunk::install (
     group   => 'root',
     backup  => true,
     content => template('splunk/opt/splunk/etc/passwd.erb'),
-  } ->
-
-  #setting the mode, owner and group here forces a restart if the splunk app
-  #makes any changes here.
-  file { "${splunkhome}/etc/auth":
-      recurse            => 'remote',
-      purge              => false,
-      source_permissions => 'ignore',
-      source             => 'puppet:///modules/splunk/noarch/opt/splunk/etc/auth',
-  }
+  } 
 }
